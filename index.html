@@ -1,0 +1,1192 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Захар Сесюгин — Инженер-разработчик</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,300;1,400&display=swap');
+
+:root {
+  --bg:       #ffffff;
+  --bg-alt:   #f4f4f4;
+  --bg-card:  #ffffff;
+  --text:     #1e1e1e;
+  --text-2:   #5a5a5a;
+  --text-3:   #999999;
+  --accent:   #d42020;
+  --accent-d: #b01a1a;
+  --dark:     #1e1e1e;
+  --line:     rgba(30,30,30,0.15);
+  --line-s:   rgba(30,30,30,0.08);
+  --shadow:   rgba(0,0,0,0.08);
+  --shadow-h: rgba(0,0,0,0.18);
+}
+[data-theme="dark"] {
+  --bg:       #1a1a1a;
+  --bg-alt:   #222222;
+  --bg-card:  #252525;
+  --text:     #f0f0f0;
+  --text-2:   #aaaaaa;
+  --text-3:   #666666;
+  --dark:     #f0f0f0;
+  --line:     rgba(240,240,240,0.12);
+  --line-s:   rgba(240,240,240,0.06);
+  --shadow:   rgba(0,0,0,0.35);
+  --shadow-h: rgba(0,0,0,0.55);
+}
+
+*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior:smooth; }
+body {
+  font-family:'Inter', system-ui, sans-serif;
+  background:var(--bg); color:var(--text);
+  transition:background .35s ease, color .35s ease;
+  overflow-x:hidden; line-height:1.6;
+}
+::selection { background:var(--accent); color:#fff; }
+img { display:block; max-width:100%; }
+
+/* ═══════════════════════════ NAV ═══════════════════════════ */
+nav {
+  position:fixed; inset:0 0 auto 0; z-index:900;
+  height:58px; background:var(--bg);
+  border-bottom:1px solid var(--line);
+  transition:background .35s, border-color .35s;
+}
+.nav-in {
+  max-width:1280px; margin:0 auto; height:100%;
+  display:flex; align-items:center; justify-content:space-between;
+  padding:0 48px;
+}
+.logo { font-weight:900; font-size:17px; letter-spacing:-.5px; color:var(--text); text-decoration:none; }
+.logo em { color:var(--accent); font-style:normal; }
+.nav-links { display:flex; gap:32px; align-items:center; }
+.nav-links a {
+  font-size:11px; font-weight:600; color:var(--text-2); text-decoration:none;
+  text-transform:uppercase; letter-spacing:1.5px; transition:color .25s; position:relative;
+}
+.nav-links a::after {
+  content:''; position:absolute; bottom:-3px; left:0; width:0; height:1.5px;
+  background:var(--accent); transition:width .25s;
+}
+.nav-links a:hover { color:var(--accent); }
+.nav-links a:hover::after { width:100%; }
+.nav-right { display:flex; align-items:center; gap:16px; }
+.toggle {
+  width:42px; height:22px; border-radius:11px; background:var(--dark);
+  border:none; cursor:pointer; position:relative; transition:background .35s; flex-shrink:0;
+}
+.toggle::after {
+  content:''; position:absolute; top:3px; left:3px;
+  width:16px; height:16px; border-radius:50%;
+  background:var(--bg); transition:transform .35s, background .35s;
+}
+[data-theme="dark"] .toggle::after { transform:translateX(20px); }
+
+/* ═══════════════════════════ HERO ═══════════════════════════ */
+.hero {
+  min-height:100vh; padding:80px 48px 60px;
+  display:flex; align-items:center; position:relative; overflow:hidden;
+}
+.hero::before {
+  content:''; position:absolute; top:0; right:0;
+  width:50%; height:100%; background:var(--bg-alt);
+  transition:background .35s; z-index:0;
+}
+.hero-in {
+  max-width:1280px; margin:0 auto; width:100%;
+  display:grid; grid-template-columns:1fr 1fr; gap:80px;
+  align-items:center; position:relative; z-index:1;
+}
+.hero-tag {
+  display:inline-flex; align-items:center; gap:8px;
+  font-size:11px; font-weight:600; text-transform:uppercase;
+  letter-spacing:2px; color:var(--accent); margin-bottom:20px;
+}
+.hero-tag::before { content:''; display:block; width:28px; height:1.5px; background:var(--accent); }
+.hero h1 {
+  font-size:clamp(44px,5.5vw,72px); font-weight:900;
+  line-height:1.02; letter-spacing:-2.5px; margin-bottom:28px;
+}
+.hero h1 span { color:var(--accent); }
+.hero-bio {
+  font-size:17px; line-height:1.75; color:var(--text-2);
+  max-width:440px; margin-bottom:40px; border-left:3px solid var(--accent);
+  padding-left:20px;
+}
+.hero-stats {
+  display:grid; grid-template-columns:repeat(3,1fr); gap:0;
+  border:1px solid var(--line); margin-bottom:40px;
+}
+.h-stat {
+  padding:20px 24px; border-right:1px solid var(--line); transition:border-color .35s;
+}
+.h-stat:last-child { border-right:none; }
+.h-stat .n { font-size:32px; font-weight:900; color:var(--accent); line-height:1; }
+.h-stat .l { font-size:11px; text-transform:uppercase; letter-spacing:1px; color:var(--text-2); margin-top:4px; }
+.hero-location {
+  font-size:13px; color:var(--text-3); display:flex; align-items:center; gap:8px;
+}
+.hero-location::before { content:'◉'; color:var(--accent); font-size:10px; }
+
+/* Hero photos — creative stacked layout */
+.hero-photos { position:relative; height:560px; }
+.hp-main {
+  position:absolute; right:0; top:0;
+  width:78%; height:480px; object-fit:cover;
+  border:2px solid var(--line); transition:border-color .35s;
+  filter:grayscale(15%); transition:filter .4s, border-color .35s;
+}
+.hp-main:hover { filter:grayscale(0); }
+.hp-float {
+  position:absolute; left:0; bottom:0;
+  width:48%; height:240px; object-fit:cover;
+  border:2px solid var(--line); transition:border-color .35s;
+  filter:grayscale(20%); transition:filter .4s, border-color .35s;
+  box-shadow:0 16px 48px var(--shadow-h);
+}
+.hp-float:hover { filter:grayscale(0); }
+.hp-accent-tl {
+  position:absolute; top:-12px; left:-12px;
+  width:56px; height:56px;
+  border-top:3px solid var(--accent); border-left:3px solid var(--accent);
+  pointer-events:none;
+}
+.hp-accent-br {
+  position:absolute; bottom:-12px; right:-12px;
+  width:56px; height:56px;
+  border-bottom:3px solid var(--accent); border-right:3px solid var(--accent);
+  pointer-events:none;
+}
+.hp-label {
+  position:absolute; bottom:256px; right:0;
+  background:var(--accent); color:#fff;
+  font-size:10px; font-weight:700; letter-spacing:1.5px; text-transform:uppercase;
+  padding:6px 14px;
+}
+
+/* ═══════════════════════════ SECTIONS ═══════════════════════ */
+section { padding:100px 48px; }
+.bg-alt { background:var(--bg-alt); transition:background .35s; }
+.wrap { max-width:1280px; margin:0 auto; }
+
+.s-head { margin-bottom:64px; }
+.s-num {
+  font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:3px;
+  color:var(--accent); margin-bottom:12px; display:flex; align-items:center; gap:10px;
+}
+.s-num::after { content:''; flex:1; max-width:40px; height:1px; background:var(--accent); }
+.s-head h2 {
+  font-size:clamp(30px,3.8vw,50px); font-weight:900;
+  letter-spacing:-1.5px; line-height:1.1;
+}
+.s-head p { margin-top:16px; font-size:16px; color:var(--text-2); max-width:520px; line-height:1.7; }
+
+/* ═══════════════════════════ ABOUT SPLIT ══════════════════════ */
+.about-grid {
+  display:grid; grid-template-columns:1fr 1fr; gap:80px; align-items:center;
+}
+.about-photos { display:grid; grid-template-columns:1fr 1fr; gap:12px; }
+.about-photos img {
+  width:100%; object-fit:cover;
+  filter:grayscale(20%); transition:filter .4s, transform .4s;
+  border:1px solid var(--line); transition:border-color .35s;
+}
+.about-photos img:hover { filter:grayscale(0); transform:scale(1.02); }
+.about-photos .tall { grid-row:span 2; height:400px; }
+.about-photos .short { height:192px; }
+.about-text h3 { font-size:24px; font-weight:800; letter-spacing:-.5px; margin-bottom:16px; }
+.about-text p { font-size:15px; color:var(--text-2); line-height:1.8; margin-bottom:16px; }
+.about-chips { display:flex; flex-wrap:wrap; gap:8px; margin-top:24px; }
+.chip {
+  font-size:11px; font-weight:600; text-transform:uppercase; letter-spacing:1px;
+  border:1.5px solid var(--line); padding:5px 12px; color:var(--text-2);
+  transition:all .25s;
+}
+.chip:hover { border-color:var(--accent); color:var(--accent); }
+
+/* ═══════════════════════════ SKILLS ════════════════════════════ */
+.skills-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:1px; background:var(--line); }
+.sk-card {
+  background:var(--bg-card); padding:36px 32px;
+  position:relative; overflow:hidden; transition:background .35s;
+}
+.sk-card::before {
+  content:''; position:absolute; left:0; top:0; width:3px; height:0;
+  background:var(--accent); transition:height .4s;
+}
+.sk-card:hover::before { height:100%; }
+.sk-icon {
+  font-size:28px; margin-bottom:16px; line-height:1;
+  filter:grayscale(1); transition:filter .3s;
+}
+.sk-card:hover .sk-icon { filter:grayscale(0); }
+.sk-card h3 { font-size:15px; font-weight:700; margin-bottom:8px; letter-spacing:-.2px; }
+.sk-card p { font-size:13px; color:var(--text-2); line-height:1.65; }
+.sk-since {
+  margin-top:12px; font-size:11px; font-weight:600; color:var(--accent);
+  text-transform:uppercase; letter-spacing:1px;
+}
+
+/* ═══════════════════════════ MASONRY GALLERY ════════════════════ */
+.masonry {
+  column-count:4; column-gap:12px;
+  padding:0 0 12px;
+}
+.masonry-item {
+  break-inside:avoid; margin-bottom:12px; position:relative;
+  overflow:hidden; cursor:pointer;
+}
+.masonry-item img {
+  width:100%; display:block; object-fit:cover;
+  filter:grayscale(25%); transition:filter .45s, transform .45s;
+}
+.masonry-item:hover img { filter:grayscale(0); transform:scale(1.04); }
+.masonry-overlay {
+  position:absolute; inset:0; background:rgba(212,32,32,0);
+  display:flex; flex-direction:column; justify-content:flex-end;
+  padding:20px 16px; transition:background .4s;
+}
+.masonry-item:hover .masonry-overlay { background:rgba(212,32,32,0.72); }
+.masonry-label {
+  color:#fff; font-size:12px; font-weight:600; text-transform:uppercase;
+  letter-spacing:1px; opacity:0; transform:translateY(8px);
+  transition:opacity .35s, transform .35s;
+}
+.masonry-item:hover .masonry-label { opacity:1; transform:translateY(0); }
+
+/* ═══════════════════════════ TIMELINE ══════════════════════════ */
+.tl { display:flex; flex-direction:column; gap:0; }
+.tl-item {
+  display:grid; grid-template-columns:180px 40px 1fr;
+  gap:0; min-height:120px;
+}
+.tl-date {
+  padding:32px 24px 32px 0; text-align:right;
+  font-size:12px; font-weight:700; color:var(--accent);
+  text-transform:uppercase; letter-spacing:1.5px; line-height:1.4;
+  border-right:none;
+}
+.tl-spine {
+  display:flex; flex-direction:column; align-items:center;
+  padding-top:36px; position:relative;
+}
+.tl-dot {
+  width:14px; height:14px; border-radius:50%;
+  background:var(--accent); border:3px solid var(--bg);
+  flex-shrink:0; box-shadow:0 0 0 1.5px var(--accent);
+  transition:border-color .35s; z-index:1;
+}
+.tl-line {
+  flex:1; width:2px; background:var(--line); transition:background .35s;
+  margin-top:6px;
+}
+.tl-item:last-child .tl-line { display:none; }
+.tl-body {
+  padding:28px 0 40px 28px;
+  border-bottom:1px solid var(--line-s); transition:border-color .35s;
+}
+.tl-item:last-child .tl-body { border-bottom:none; }
+.tl-org { font-size:11px; font-weight:600; color:var(--accent); text-transform:uppercase; letter-spacing:1.5px; margin-bottom:6px; }
+.tl-body h3 { font-size:20px; font-weight:800; letter-spacing:-.4px; margin-bottom:4px; }
+.tl-sub { font-size:13px; color:var(--text-2); margin-bottom:14px; font-style:italic; }
+.tl-body p { font-size:14px; color:var(--text-2); line-height:1.75; }
+.tl-tags { display:flex; flex-wrap:wrap; gap:6px; margin-top:14px; }
+.tl-tag {
+  font-size:10px; font-weight:600; text-transform:uppercase; letter-spacing:.8px;
+  background:var(--line-s); padding:3px 10px; color:var(--text-2); transition:background .35s;
+}
+.tl-photo-row { display:flex; gap:10px; margin-top:16px; }
+.tl-photo-row img {
+  height:110px; width:auto; object-fit:cover;
+  filter:grayscale(30%); border:1px solid var(--line);
+  transition:filter .4s, border-color .35s; cursor:pointer;
+}
+.tl-photo-row img:hover { filter:grayscale(0); }
+
+/* ═══════════════════════════ MAGAZINE BLOCKS ════════════════════ */
+.mag-block {
+  display:grid; grid-template-columns:1fr 1fr; gap:0;
+  border:1px solid var(--line); margin-bottom:24px;
+  transition:border-color .35s; overflow:hidden;
+}
+.mag-block.rev { direction:rtl; }
+.mag-block.rev > * { direction:ltr; }
+.mag-img { overflow:hidden; position:relative; min-height:320px; }
+.mag-img img {
+  width:100%; height:100%; object-fit:cover;
+  filter:grayscale(20%); transition:filter .5s, transform .5s;
+}
+.mag-block:hover .mag-img img { filter:grayscale(0); transform:scale(1.04); }
+.mag-img .photo-num {
+  position:absolute; top:16px; left:16px;
+  background:var(--accent); color:#fff;
+  font-size:10px; font-weight:700; letter-spacing:2px; text-transform:uppercase;
+  padding:5px 12px;
+}
+.mag-text {
+  padding:48px 44px; display:flex; flex-direction:column; justify-content:center;
+  background:var(--bg-card); transition:background .35s;
+}
+.mag-text h3 { font-size:22px; font-weight:800; letter-spacing:-.5px; margin-bottom:12px; }
+.mag-text p { font-size:14px; color:var(--text-2); line-height:1.8; margin-bottom:14px; }
+.mag-text .year { font-size:11px; font-weight:700; color:var(--accent); text-transform:uppercase; letter-spacing:2px; margin-bottom:10px; }
+
+/* ═══════════════════════════ ENG TABLE ═════════════════════════ */
+.eng-table { width:100%; border-collapse:collapse; }
+.eng-table thead th {
+  font-size:10px; font-weight:700; text-transform:uppercase;
+  letter-spacing:2px; color:var(--text-3); padding:12px 20px;
+  text-align:left; border-bottom:2px solid var(--dark);
+  transition:border-color .35s; background:var(--bg-card); transition:background .35s;
+}
+.eng-table tbody tr {
+  border-bottom:1px solid var(--line-s); transition:background .2s, border-color .35s;
+}
+.eng-table tbody tr:hover { background:var(--bg-alt); }
+.eng-table td {
+  padding:22px 20px; font-size:14px; vertical-align:top;
+}
+.eng-table .co { font-weight:700; color:var(--accent); width:220px; }
+.eng-table .role { font-size:12px; font-weight:600; color:var(--text-3); text-transform:uppercase; letter-spacing:1px; margin-top:3px; }
+.eng-table .desc { color:var(--text-2); line-height:1.65; }
+
+/* ═══════════════════════════ PROJECTS ══════════════════════════ */
+.proj-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:16px; }
+.proj-card {
+  padding:32px 28px; background:var(--bg-card);
+  border:1px solid var(--line); transition:all .3s;
+  position:relative; overflow:hidden;
+}
+.proj-card::after {
+  content:''; position:absolute; bottom:0; left:0;
+  width:0; height:2px; background:var(--accent); transition:width .4s;
+}
+.proj-card:hover::after { width:100%; }
+.proj-card:hover { transform:translateY(-4px); box-shadow:0 16px 48px var(--shadow-h); }
+.proj-head {
+  display:flex; align-items:flex-start; justify-content:space-between;
+  margin-bottom:12px; gap:12px;
+}
+.proj-head h3 { font-size:16px; font-weight:800; letter-spacing:-.3px; line-height:1.3; }
+.proj-tag {
+  font-size:9px; font-weight:700; text-transform:uppercase; letter-spacing:1px;
+  background:var(--accent); color:#fff; padding:3px 10px; flex-shrink:0; margin-top:2px;
+}
+.proj-card p { font-size:13px; color:var(--text-2); line-height:1.7; }
+.proj-card.featured {
+  grid-column:span 2; display:grid; grid-template-columns:1fr 1fr; gap:40px; padding:40px;
+}
+.proj-card.featured .proj-head h3 { font-size:22px; }
+.proj-card.featured p { font-size:15px; }
+.proj-visual {
+  background:var(--bg-alt); transition:background .35s;
+  display:flex; align-items:center; justify-content:center;
+  font-size:64px; border:1px solid var(--line);
+}
+
+/* ═══════════════════════════ PHOTO WALL ════════════════════════ */
+.photo-wall {
+  display:grid;
+  grid-template-columns:repeat(5,1fr);
+  grid-template-rows:220px 220px;
+  gap:8px;
+}
+.pw-item { overflow:hidden; position:relative; cursor:pointer; }
+.pw-item img {
+  width:100%; height:100%; object-fit:cover;
+  filter:grayscale(40%); transition:filter .45s, transform .45s;
+}
+.pw-item:hover img { filter:grayscale(0); transform:scale(1.06); }
+.pw-item.big { grid-column:span 2; grid-row:span 2; }
+.pw-item.tall { grid-row:span 2; }
+.pw-caption {
+  position:absolute; inset:0; background:rgba(30,30,30,0);
+  display:flex; align-items:flex-end; padding:14px;
+  transition:background .35s;
+}
+.pw-item:hover .pw-caption { background:rgba(30,30,30,0.55); }
+.pw-caption span {
+  color:#fff; font-size:11px; font-weight:600; text-transform:uppercase;
+  letter-spacing:1px; opacity:0; transform:translateY(6px);
+  transition:opacity .3s, transform .3s;
+}
+.pw-item:hover .pw-caption span { opacity:1; transform:translateY(0); }
+.pw-item .red-strip {
+  position:absolute; top:0; left:0; right:0; height:3px; background:var(--accent);
+  transform:scaleX(0); transform-origin:left; transition:transform .35s;
+}
+.pw-item:hover .red-strip { transform:scaleX(1); }
+.pw-item.rotated img {
+  transform: rotate(90deg) scale(1.45);
+  transform-origin: center center;
+}
+.pw-item:hover.rotated img { transform: rotate(90deg) scale(1.52); }
+
+/* ═══════════════════════════ EDUCATION ═════════════════════════ */
+.edu-grid { display:grid; grid-template-columns:1fr 1fr; gap:16px; }
+.edu-card {
+  padding:40px 36px; border:1px solid var(--line);
+  background:var(--bg-card); transition:all .35s; position:relative; overflow:hidden;
+}
+.edu-card::before {
+  content:''; position:absolute; top:0; left:0; right:0; height:3px;
+  background:var(--accent); transform:scaleX(0); transform-origin:left; transition:transform .4s;
+}
+.edu-card:hover::before { transform:scaleX(1); }
+.edu-card:hover { transform:translateY(-3px); box-shadow:0 12px 40px var(--shadow); }
+.edu-icon { font-size:32px; margin-bottom:20px; }
+.edu-card h3 { font-size:16px; font-weight:800; letter-spacing:-.3px; margin-bottom:8px; }
+.edu-card .direction { font-size:14px; color:var(--text-2); margin-bottom:6px; line-height:1.5; }
+.edu-card .period { font-size:11px; color:var(--accent); font-weight:700; text-transform:uppercase; letter-spacing:1px; }
+
+/* ═══════════════════════════ FOOTER ════════════════════════════ */
+footer {
+  background:var(--dark); color:var(--bg);
+  padding:80px 48px 60px; transition:background .35s, color .35s;
+  position:relative; overflow:hidden;
+}
+footer::before {
+  content:''; position:absolute; top:0; left:0; right:0; height:3px;
+  background:var(--accent);
+}
+.footer-in { max-width:1280px; margin:0 auto; }
+.footer-name {
+  font-size:clamp(36px,5vw,64px); font-weight:900; letter-spacing:-2px;
+  line-height:1; margin-bottom:20px;
+}
+.footer-name em { color:var(--accent); font-style:normal; }
+.footer-row {
+  display:flex; justify-content:space-between; align-items:flex-end;
+  border-top:1px solid rgba(255,255,255,.12); padding-top:32px; margin-top:32px;
+  flex-wrap:wrap; gap:20px;
+}
+.footer-info p { font-size:14px; color:rgba(255,255,255,.5); margin-top:4px; }
+.footer-roles { display:flex; gap:24px; flex-wrap:wrap; }
+.footer-roles span {
+  font-size:11px; font-weight:600; text-transform:uppercase; letter-spacing:1.5px;
+  color:rgba(255,255,255,.4);
+}
+.footer-roles span.active { color:var(--accent); }
+
+/* ═══════════════════════════ LIGHTBOX ══════════════════════════ */
+.lb {
+  position:fixed; inset:0; background:rgba(0,0,0,.92); z-index:2000;
+  display:none; align-items:center; justify-content:center;
+}
+.lb.open { display:flex; }
+.lb-img { max-width:90vw; max-height:90vh; object-fit:contain; border:2px solid var(--accent); }
+.lb-close {
+  position:absolute; top:20px; right:28px; background:none; border:none;
+  color:#fff; font-size:32px; cursor:pointer; font-weight:300; line-height:1;
+}
+.lb-close:hover { color:var(--accent); }
+
+/* ═══════════════════════════ DIVIDER ═══════════════════════════ */
+.divider { height:1px; background:var(--line); transition:background .35s; }
+.divider-red { height:3px; background:var(--accent); }
+
+/* ═══════════════════════════ FADE ══════════════════════════════ */
+.fi { opacity:0; transform:translateY(28px); transition:opacity .6s ease, transform .6s ease; }
+.fi.vis { opacity:1; transform:translateY(0); }
+.fi-l { opacity:0; transform:translateX(-28px); transition:opacity .6s ease, transform .6s ease; }
+.fi-l.vis { opacity:1; transform:translateX(0); }
+.fi-r { opacity:0; transform:translateX(28px); transition:opacity .6s ease, transform .6s ease; }
+.fi-r.vis { opacity:1; transform:translateX(0); }
+.d1 { transition-delay:.05s; } .d2 { transition-delay:.12s; } .d3 { transition-delay:.19s; }
+.d4 { transition-delay:.26s; } .d5 { transition-delay:.33s; } .d6 { transition-delay:.40s; }
+
+/* ═══════════════════════════ RESPONSIVE ════════════════════════ */
+@media (max-width:1024px) {
+  .masonry { column-count:3; }
+  .skills-grid { grid-template-columns:repeat(2,1fr); }
+  .photo-wall { grid-template-columns:repeat(3,1fr); grid-template-rows:auto; }
+  .pw-item.big { grid-column:span 2; grid-row:span 1; }
+  .proj-card.featured { grid-column:span 1; display:block; }
+  .proj-visual { display:none; }
+}
+@media (max-width:900px) {
+  section { padding:70px 24px; }
+  nav .nav-in { padding:0 24px; }
+  .nav-links { display:none; }
+  .hero { padding:80px 24px 50px; }
+  .hero::before { display:none; }
+  .hero-in { grid-template-columns:1fr; gap:40px; }
+  .hero-photos { height:300px; }
+  .hp-main { width:85%; height:300px; }
+  .hp-float { display:none; }
+  .about-grid { grid-template-columns:1fr; }
+  .mag-block { grid-template-columns:1fr; }
+  .mag-block.rev { direction:ltr; }
+  .proj-grid { grid-template-columns:1fr; }
+  .proj-card.featured { display:block; }
+  .edu-grid { grid-template-columns:1fr; }
+  .masonry { column-count:2; }
+  .photo-wall { display:grid; grid-template-columns:1fr 1fr; grid-template-rows:auto; }
+  .pw-item.big, .pw-item.tall { grid-column:span 1; grid-row:span 1; }
+  .tl-item { grid-template-columns:80px 32px 1fr; }
+  .footer-row { flex-direction:column; align-items:flex-start; }
+}
+@media (max-width:600px) {
+  .hero-stats { grid-template-columns:1fr 1fr; }
+  .masonry { column-count:2; }
+  .skills-grid { grid-template-columns:1fr; }
+}
+</style>
+</head>
+<body>
+
+<!-- ════ NAV ════ -->
+<nav>
+  <div class="nav-in">
+    <a href="#top" class="logo">З<em>.</em>Д<em>.</em>СЕСЮГИН</a>
+    <div class="nav-links">
+      <a href="#about">О себе</a>
+      <a href="#skills">Навыки</a>
+      <a href="#gallery">Галерея</a>
+      <a href="#experience">Опыт</a>
+      <a href="#engineering">Инженерия</a>
+      <a href="#projects">Проекты</a>
+      <a href="#education">Образование</a>
+    </div>
+    <div class="nav-right">
+      <button class="toggle" onclick="toggleTheme()" aria-label="Тёмная тема"></button>
+    </div>
+  </div>
+</nav>
+
+<!-- ════ HERO ════ -->
+<section class="hero" id="top">
+  <div class="hero-in">
+    <div class="hero-text fi">
+      <div class="hero-tag">Инженер-разработчик &amp; Наставник</div>
+      <h1>Захар Дмитриевич<br><span>Сесюгин</span></h1>
+      <p class="hero-bio">Эксперт в области высоких технологий — БПЛА, VR/AR, искусственный интеллект. Реализую федеральные образовательные проекты и промышленную автоматизацию. Наставник, спикер, инженер.</p>
+      <div class="hero-stats fi d1">
+        <div class="h-stat"><div class="n">7+</div><div class="l">Лет опыта</div></div>
+        <div class="h-stat"><div class="n">19+</div><div class="l">Проектов</div></div>
+        <div class="h-stat"><div class="n">30+</div><div class="l">Мероприятий</div></div>
+      </div>
+      <div class="hero-location fi d2">г. Вологда &nbsp;·&nbsp; р. 17.07.2003</div>
+    </div>
+    <div class="hero-photos fi-r">
+      <div class="hp-accent-tl"></div>
+      <img src="photos/photo_0.jpeg" alt="Выступление на конференции" class="hp-main" onclick="openLb(this)">
+      <img src="photos/photo_2.jpeg" alt="Презентация БПЛА" class="hp-float" onclick="openLb(this)">
+      <div class="hp-accent-br"></div>
+      <div class="hp-label">Спикер · Наставник</div>
+    </div>
+  </div>
+</section>
+
+<div class="divider-red"></div>
+
+<!-- ════ ABOUT ════ -->
+<section id="about">
+  <div class="wrap">
+    <div class="about-grid">
+      <div class="about-photos fi-l">
+        <img src="photos/photo_16.jpeg" alt="Конференция" class="tall" onclick="openLb(this)">
+        <img src="photos/photo_13.jpeg" alt="Форум" class="short" onclick="openLb(this)">
+        <img src="photos/photo_19.jpeg" alt="Панельная дискуссия" class="short" onclick="openLb(this)">
+      </div>
+      <div class="about-text fi-r">
+        <div class="s-num">00 / Профиль</div>
+        <h3>Инженер, который учит<br>и строит одновременно</h3>
+        <p>С 2017 года занимаюсь аддитивными технологиями, с 2019 года — образовательными проектами для молодёжи, с 2020 года — робототехникой, ЧПУ и промышленной автоматизацией.</p>
+        <p>Работал с Газпром нефтью, Иннопрактикой, Министерством сельского хозяйства РФ, выступал в Сириусе, Артеке, на ВДНХ и Всемирном фестивале молодёжи. Создаю собственные R&D-проекты — от умного дома на 150+ устройствах до AR-монокуляра.</p>
+        <p>Параллельно с практикой веду инженерные хакатоны, преподаю IT-дисциплины и проектирую музейные VR-пространства.</p>
+        <div class="about-chips fi d1">
+          <span class="chip">БПЛА / FPV</span>
+          <span class="chip">VR · AR · MR</span>
+          <span class="chip">3D-печать</span>
+          <span class="chip">ИИ / МО</span>
+          <span class="chip">ЧПУ-станки</span>
+          <span class="chip">IoT · ESPHome</span>
+          <span class="chip">3D-сканирование</span>
+          <span class="chip">Автоматизация ОВЕН</span>
+          <span class="chip">ЛВС · Видеонаблюдение</span>
+          <span class="chip">Сторителлинг</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ════ SKILLS ════ -->
+<section id="skills" class="bg-alt">
+  <div class="wrap">
+    <div class="s-head fi">
+      <div class="s-num">01 / Компетенции</div>
+      <h2>Ключевые навыки</h2>
+      <p>Технологии, которыми владею на уровне преподавателя и практикующего инженера.</p>
+    </div>
+    <div class="skills-grid fi">
+      <div class="sk-card d1">
+        <div class="sk-icon">🚁</div>
+        <h3>БПЛА &amp; FPV Фристайл</h3>
+        <p>Профессиональный фристайл на FPV дронах, участие в соревнованиях и аэросъёмка. Разработка кейсов и обучение пилотированию.</p>
+        <div class="sk-since">с 2019 года</div>
+      </div>
+      <div class="sk-card d2">
+        <div class="sk-icon">🖨️</div>
+        <h3>Аддитивные технологии</h3>
+        <p>Углублённое использование 3D-печати: прототипирование, производство деталей, создание конструкторов. Работа с промышленными принтерами.</p>
+        <div class="sk-since">с 2017 года</div>
+      </div>
+      <div class="sk-card d3">
+        <div class="sk-icon">⚙️</div>
+        <h3>Робототехника &amp; ЧПУ</h3>
+        <p>Лазерные резаки, фрезеры, промышленные манипуляторы, автоматизация производственных линий на базе решений ОВЕН.</p>
+        <div class="sk-since">с 2020 года</div>
+      </div>
+      <div class="sk-card d4">
+        <div class="sk-icon">🥽</div>
+        <h3>VR / AR / MR</h3>
+        <p>Создание VR-контента, работа с тренажёрами и музейными пространствами. Демонстрация и внедрение технологий смешанной реальности.</p>
+        <div class="sk-since">с 2021 года</div>
+      </div>
+      <div class="sk-card d5">
+        <div class="sk-icon">🧠</div>
+        <h3>Искусственный интеллект</h3>
+        <p>Обучение моделей для детекции и трекинга объектов. Персонализированные голосовые ассистенты с уникальным характером.</p>
+        <div class="sk-since">с 2022 года</div>
+      </div>
+      <div class="sk-card d6">
+        <div class="sk-icon">📡</div>
+        <h3>3D-сканирование &amp; IoT</h3>
+        <p>Фотограмметрия с БПЛА, создание VR-копий помещений. Разработка IoT-устройств на ESP32 с локальной автоматизацией.</p>
+        <div class="sk-since">с 2020 года</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════ GALLERY — MASONRY ════ -->
+<section id="gallery" style="padding:60px 48px;">
+  <div class="wrap">
+    <div class="s-head fi" style="margin-bottom:36px;">
+      <div class="s-num">— / Фотогалерея</div>
+      <h2>Из жизни проектов</h2>
+    </div>
+    <div class="masonry fi">
+      <div class="masonry-item" onclick="openLb(this.querySelector('img'))">
+        <img src="photos/photo_4.jpeg" alt="FPV-дрон в лаборатории">
+        <div class="masonry-overlay"><div class="masonry-label">FPV & VR-лаборатория</div></div>
+      </div>
+      <div class="masonry-item" onclick="openLb(this.querySelector('img'))">
+        <img src="photos/photo_1.jpeg" alt="Наставничество">
+        <div class="masonry-overlay"><div class="masonry-label">Наставничество</div></div>
+      </div>
+      <div class="masonry-item" onclick="openLb(this.querySelector('img'))">
+        <img src="photos/photo_7.jpeg" alt="VR-шлем">
+        <div class="masonry-overlay"><div class="masonry-label">VR-тренажёр</div></div>
+      </div>
+      <div class="masonry-item" onclick="openLb(this.querySelector('img'))">
+        <img src="photos/photo_22.jpeg" alt="Инженерный хакатон">
+        <div class="masonry-overlay"><div class="masonry-label">Инженерный хакатон</div></div>
+      </div>
+      <div class="masonry-item" onclick="openLb(this.querySelector('img'))">
+        <img src="photos/photo_17.jpeg" alt="VR демонстрация">
+        <div class="masonry-overlay"><div class="masonry-label">Демонстрация VR</div></div>
+      </div>
+      <div class="masonry-item" onclick="openLb(this.querySelector('img'))">
+        <img src="photos/photo_14.jpeg" alt="Дрон — презентация">
+        <div class="masonry-overlay"><div class="masonry-label">Презентация БПЛА</div></div>
+      </div>
+      <div class="masonry-item" onclick="openLb(this.querySelector('img'))">
+        <img src="photos/photo_24.jpeg" alt="Умножая таланты">
+        <div class="masonry-overlay"><div class="masonry-label">«Умножая таланты»</div></div>
+      </div>
+      <div class="masonry-item" onclick="openLb(this.querySelector('img'))">
+        <img src="photos/photo_6.jpeg" alt="3D-принтер">
+        <div class="masonry-overlay"><div class="masonry-label">3D-технологии</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider-red"></div>
+
+<!-- ════ EXPERIENCE ════ -->
+<section id="experience" class="bg-alt">
+  <div class="wrap">
+    <div class="s-head fi">
+      <div class="s-num">02 / Опыт</div>
+      <h2>Образовательные проекты</h2>
+      <p>Работа наставником, спикером и руководителем на федеральных и региональных платформах.</p>
+    </div>
+    <div class="tl fi">
+
+      <div class="tl-item">
+        <div class="tl-date">2024–<br>2026</div>
+        <div class="tl-spine"><div class="tl-dot"></div><div class="tl-line"></div></div>
+        <div class="tl-body">
+          <div class="tl-org">Газпром нефть · ЯНАО</div>
+          <h3>АНО «Траектория будущего»</h3>
+          <div class="tl-sub">Наставник и автор кейсов</div>
+          <p>Региональный и финальный этапы турнира «Умножая таланты»: кейсы по БПЛА, машинному зрению, VR-тренажёрам. Спикер по направлению БПЛА на Дне оленевода (пос. Тазовский). Эксперт по IoT, ML и БПЛА для профильных смен и научных кэмпов в Муравленко, Ноябрьске, Тарко-Сале, Надыме и Яр-Сале.</p>
+          <div class="tl-tags">
+            <span class="tl-tag">Санкт-Петербург</span>
+            <span class="tl-tag">Томск</span>
+            <span class="tl-tag">Тарко-Сале</span>
+            <span class="tl-tag">ЯНАО</span>
+          </div>
+          <div class="tl-photo-row">
+            <img src="photos/photo_24.jpeg" alt="Умножая таланты" onclick="openLb(this)">
+            <img src="photos/photo_4.jpeg" alt="FPV-лаб" onclick="openLb(this)">
+          </div>
+        </div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-date">2024–<br>2025</div>
+        <div class="tl-spine"><div class="tl-dot"></div><div class="tl-line"></div></div>
+        <div class="tl-body">
+          <div class="tl-org">Иннопрактика</div>
+          <h3>АНО «ЦРО «Интеграция»»</h3>
+          <div class="tl-sub">Руководитель образовательного проекта</div>
+          <p>«Большие вызовы» (Сириус, Сочи) — направление «Передовые промышленные технологии». Эксперт Министерства сельского хозяйства РФ по БПЛА на 100-летии лагеря «Артек». Младший методист, эксперт по БПЛА и MR-технологиям на олимпиаде «Иннагрика» и лагере «ПроАгро» (Москва, Воронеж, Нижний Новгород).</p>
+          <div class="tl-tags">
+            <span class="tl-tag">Сириус · Сочи</span>
+            <span class="tl-tag">Артек</span>
+            <span class="tl-tag">Москва</span>
+            <span class="tl-tag">Воронеж</span>
+            <span class="tl-tag">Нижний Новгород</span>
+          </div>
+          <div class="tl-photo-row">
+            <img src="photos/photo_23.jpeg" alt="Большие вызовы" onclick="openLb(this)">
+            <img src="photos/photo_18.jpeg" alt="Иннагрика БПЛА" onclick="openLb(this)">
+            <img src="photos/photo_10.jpeg" alt="Иннагрика церемония" onclick="openLb(this)">
+          </div>
+        </div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-date">2023–<br>2024</div>
+        <div class="tl-spine"><div class="tl-dot"></div><div class="tl-line"></div></div>
+        <div class="tl-body">
+          <div class="tl-org">Молодёжь Москвы</div>
+          <h3>Проектный офис «Молодёжь Москвы»</h3>
+          <div class="tl-sub">Атташе · Модератор · Организатор</div>
+          <p>Атташе делегации Москвы на Всемирном фестивале молодёжи. Модератор палаточного слёта «STOЛица Лето». Организатор Московского урбанистического форума.</p>
+          <div class="tl-tags">
+            <span class="tl-tag">ВФМ</span>
+            <span class="tl-tag">Урбанистика</span>
+            <span class="tl-tag">Москва</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-date">2019–<br>2024</div>
+        <div class="tl-spine"><div class="tl-dot"></div><div class="tl-line"></div></div>
+        <div class="tl-body">
+          <div class="tl-org">ВоГУ · ДООЦ · ЦОПП</div>
+          <h3>Региональный опыт (Вологда)</h3>
+          <div class="tl-sub">Организатор · Наставник · Спикер</div>
+          <p>Организатор международной конференции «Биотехнологии — драйвер развития территорий». Наставник и преподаватель инженерных хакатонов «Инженер будущего» и «Инженер в каждый дом» в ДНК им. С.В. Ильюшина. Преподаватель IT-смены «Интернешка» в ДООЦ «Лесная сказка». Спикер конференций «От Учителя к Учёному», «Образование: школа-университет-предприятие». Экспонент ВДНХ (выставка «РОССИЯ»). Летняя школа Роснефти (МГУ), центр «Полярная звезда».</p>
+          <div class="tl-tags">
+            <span class="tl-tag">Вологда</span>
+            <span class="tl-tag">ВДНХ</span>
+            <span class="tl-tag">Роснефть · МГУ</span>
+            <span class="tl-tag">Хакатоны</span>
+          </div>
+          <div class="tl-photo-row">
+            <img src="photos/photo_1.jpeg" alt="Наставничество" onclick="openLb(this)">
+            <img src="photos/photo_11.jpeg" alt="В лаборатории" onclick="openLb(this)">
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ════ MAGAZINE BLOCKS — VR & ДРОНЫ ════ -->
+<section style="padding:80px 48px; background:var(--bg);">
+  <div class="wrap">
+    <div class="s-head fi" style="margin-bottom:40px;">
+      <div class="s-num">— / В деталях</div>
+      <h2>Направления в фокусе</h2>
+    </div>
+
+    <div class="mag-block fi">
+      <div class="mag-img">
+        <img src="photos/photo_17.jpeg" alt="VR-тренажёры">
+        <div class="photo-num">VR / AR</div>
+      </div>
+      <div class="mag-text">
+        <div class="year">2021 — 2026</div>
+        <h3>VR-тренажёры и пространства</h3>
+        <p>Создаю контент для VR-тренажёров, провожу демонстрации на форумах и конференциях, обучаю работе с гарнитурами Meta Quest. Разработал VR-пространство для Nordsity — Музея наук в Вологде.</p>
+        <p>Участвовал в демо-сессиях для школьников, студентов и представителей промышленности на площадках от Сириуса до ЯМАО.</p>
+      </div>
+    </div>
+
+    <div class="mag-block rev fi">
+      <div class="mag-img">
+        <img src="photos/photo_14.jpeg" alt="БПЛА-технологии">
+        <div class="photo-num">БПЛА</div>
+      </div>
+      <div class="mag-text">
+        <div class="year">2019 — 2026</div>
+        <h3>БПЛА: от фристайла до аналитики</h3>
+        <p>Профессиональный фристайл на FPV-дронах, аэросъёмка и разработка образовательных кейсов по машинному зрению для БПЛА.</p>
+        <p>Проводил мастер-классы для учеников классов точных наук, участников олимпиад «Иннагрика» и смен «Траектории будущего». Выступал как спикер по БПЛА перед делегатами Дня оленевода в ЯНАО.</p>
+      </div>
+    </div>
+
+    <div class="mag-block fi">
+      <div class="mag-img">
+        <img src="photos/photo_20.jpeg" alt="Менторство в VR">
+        <div class="photo-num">Менторство</div>
+      </div>
+      <div class="mag-text">
+        <div class="year">2019 — 2026</div>
+        <h3>Наставничество и передача знаний</h3>
+        <p>Работаю с учениками от 10 до 25 лет на инженерных хакатонах, в образовательных лагерях, на научных кэмпах и форумах по всей стране.</p>
+        <p>Авторская методика: от теории — сразу к практике на реальном оборудовании. Дроны, 3D-принтеры, VR-шлемы, датчики, контроллеры.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider-red"></div>
+
+<!-- ════ PHOTO WALL ════ -->
+<section style="padding:60px 48px; background:var(--bg-alt);">
+  <div class="wrap">
+    <div class="s-head fi" style="margin-bottom:36px;">
+      <div class="s-num">— / Моменты</div>
+      <h2>Фотостена</h2>
+    </div>
+    <div class="photo-wall fi">
+      <div class="pw-item big" onclick="openLb(this.querySelector('img'))">
+        <div class="red-strip"></div>
+        <img src="photos/photo_5.jpeg" alt="VR на ВДНХ">
+        <div class="pw-caption"><span>VR-демонстрация · ВДНХ</span></div>
+      </div>
+      <div class="pw-item" onclick="openLb(this.querySelector('img'))">
+        <div class="red-strip"></div>
+        <img src="photos/photo_12 " onerror="this.src='photos/photo_11.jpeg'" src="photos/photo_11.jpeg" alt="Лаборатория">
+        <div class="pw-caption"><span>3D-лаборатория</span></div>
+      </div>
+      <div class="pw-item" onclick="openLb(this.querySelector('img'))">
+        <div class="red-strip"></div>
+        <img src="photos/photo_6.jpeg" alt="3D-принтер обучение">
+        <div class="pw-caption"><span>Аддитивные технологии</span></div>
+      </div>
+      <div class="pw-item rotated" onclick="openLb(this.querySelector('img'))">
+        <div class="red-strip"></div>
+        <img src="photos/photo_sirius.jpg" alt="Большие вызовы · Сириус">
+        <div class="pw-caption"><span>Большие вызовы · Сириус</span></div>
+      </div>
+      <div class="pw-item tall" onclick="openLb(this.querySelector('img'))">
+        <div class="red-strip"></div>
+        <img src="photos/photo_14.jpeg" alt="Дрон в руках">
+        <div class="pw-caption"><span>БПЛА — мой инструмент</span></div>
+      </div>
+      <div class="pw-item" onclick="openLb(this.querySelector('img'))">
+        <div class="red-strip"></div>
+        <img src="photos/photo_10.jpeg" alt="Иннагрика">
+        <div class="pw-caption"><span>Иннагрика · Церемония</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════ ENGINEERING ════ -->
+<section id="engineering">
+  <div class="wrap">
+    <div class="s-head fi">
+      <div class="s-num">03 / Инженерия</div>
+      <h2>Монтажный и инженерный опыт</h2>
+      <p>Реальные объекты: автоматизация, монтаж, проектирование.</p>
+    </div>
+    <div class="fi">
+      <table class="eng-table">
+        <thead>
+          <tr>
+            <th>Компания</th>
+            <th>Направление и результат</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><div class="co">СеверСтройМонтаж</div><div class="role">Инженер по автоматизации</div></td>
+            <td class="desc">Реализовал систему автоматизации пиролизной установки на базе программируемых контроллеров ОВЕН. Разработка схем, монтаж, пуско-наладка.</td>
+          </tr>
+          <tr>
+            <td><div class="co">БНТиФС</div><div class="role">Инженер-разработчик</div></td>
+            <td class="desc">Разработка биореакторов-ферментёров, автоматизация теплиц и линий по выращиванию энтомофагов. Полный цикл: электромонтаж, ЛВС, программирование.</td>
+          </tr>
+          <tr>
+            <td><div class="co">Законодательное собрание ВО</div><div class="role">AV-интегратор</div></td>
+            <td class="desc">Монтаж мультимедийного оборудования зала голосования Законодательного собрания Вологодской области. Проектирование и настройка системы.</td>
+          </tr>
+          <tr>
+            <td><div class="co">Nordsity (Музей наук)</div><div class="role">Архитектор экспозиции</div></td>
+            <td class="desc">Архитектурный проект музея: подбор экспонатов, разработка сторителлинга и VR-пространства. Полная концепция от идеи до реализации.</td>
+          </tr>
+          <tr>
+            <td><div class="co">СДЕК · Росгосстрах</div><div class="role">Инженер по безопасности</div></td>
+            <td class="desc">Проектирование и монтаж систем IP-видеонаблюдения на объектах офисов и складов. Прокладка ЛВС, настройка NVR.</td>
+          </tr>
+          <tr>
+            <td><div class="co">ЦОПП</div><div class="role">AV-монтажник</div></td>
+            <td class="desc">Монтаж мультимедийного оборудования Центра опережающей профессиональной подготовки Вологодской области. Настройка систем, обучение персонала работе с оборудованием.</td>
+          </tr>
+          <tr>
+            <td><div class="co">Genotek</div><div class="role">Оператор производства</div></td>
+            <td class="desc">Производство образовательных инженерных конструкторов. Сборка, тестирование, упаковка компонентов для образовательных наборов по робототехнике и электронике.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- ════ PROJECTS ════ -->
+<section id="projects" class="bg-alt">
+  <div class="wrap">
+    <div class="s-head fi">
+      <div class="s-num">04 / R&amp;D</div>
+      <h2>Собственные проекты</h2>
+      <p>От прототипа в гараже до работающей системы в продакшене.</p>
+    </div>
+    <div class="proj-grid fi">
+
+      <div class="proj-card featured fi">
+        <div>
+          <div class="proj-head">
+            <h3>Умный дом — 150+ устройств</h3>
+            <span class="proj-tag">IoT · AI</span>
+          </div>
+          <p>Полностью локальная система умного дома на собственном сервере. Более 150 подключённых устройств — освещение, климат, безопасность, мультимедиа. Интегрирован персональный ИИ-ассистент с обученной языковой моделью и уникальным характером. Управление через голос, приложение и автоматизации.</p>
+        </div>
+        <div class="proj-visual">🏠</div>
+      </div>
+
+      <div class="proj-card fi d1">
+        <div class="proj-head">
+          <h3>Экосистема ESPHome</h3>
+          <span class="proj-tag">Hardware</span>
+        </div>
+        <p>Wi-Fi адаптеры для кондиционеров Haier, IP-камеры с локальным распознаванием лиц, умные счётчики ХВС/ГВС, модули управления домофонами. Всё на ESP32, без облаков.</p>
+      </div>
+
+      <div class="proj-card fi d2">
+        <div class="proj-head">
+          <h3>Assistant Reality</h3>
+          <span class="proj-tag">AR</span>
+        </div>
+        <p>Монокуляр на очках для вывода уведомлений, показаний мультиметра и других приборов в поле зрения. Прозрачный дисплей + Bluetooth + ESP32.</p>
+      </div>
+
+      <div class="proj-card fi d3">
+        <div class="proj-head">
+          <h3>Инженер будущего</h3>
+          <span class="proj-tag">EdTech</span>
+        </div>
+        <p>Многофункциональное устройство для школьных лабораторных работ: набор датчиков для физики, химии и биологии. Подключается к компьютеру, выводит данные в реальном времени.</p>
+      </div>
+
+      <div class="proj-card fi d4">
+        <div class="proj-head">
+          <h3>Полимерные ортезы &amp; Ионофон</h3>
+          <span class="proj-tag">MedTech</span>
+        </div>
+        <p>Лёгкие и воздухопроницаемые ортезы из 3D-печатного полимера — альтернатива гипсу. Ионофон: электроакустический излучатель с повышенным КПД без традиционной мембраны.</p>
+      </div>
+
+      <div class="proj-card fi d5">
+        <div class="proj-head">
+          <h3>ЧПУ-каллиграф &amp; Cyclop</h3>
+          <span class="proj-tag">Software · Hardware</span>
+        </div>
+        <p>ЧПУ-робот, имитирующий рукописный почерк с заданными параметрами. Образовательный 3D-сканер Cyclop: простой и доступный способ оцифровки объектов для школ и колледжей.</p>
+      </div>
+
+      <div class="proj-card fi d6">
+        <div class="proj-head">
+          <h3>FoodTech · 5WEEKS</h3>
+          <span class="proj-tag">Startup</span>
+        </div>
+        <p>Установка ультразвуковой экстракции для ускоренного созревания дистиллятов. Онлайн-платформа «5WEEKS» — персонализированные фитнес-программы.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ════ EDUCATION ════ -->
+<section id="education">
+  <div class="wrap">
+    <div class="s-head fi">
+      <div class="s-num">05 / Образование</div>
+      <h2>Академическая база</h2>
+      <p>Практика всегда была первична — но строилась на прочной теоретической основе.</p>
+    </div>
+    <div class="edu-grid fi">
+      <div class="edu-card d1">
+        <div class="edu-icon">🎨</div>
+        <h3>Вологодский колледж технологий и дизайна</h3>
+        <div class="direction">Направление: «Графический дизайн»</div>
+        <div class="period">3 курса обучения</div>
+      </div>
+      <div class="edu-card d2">
+        <div class="edu-icon">🔧</div>
+        <h3>Университетский колледж ВоГУ</h3>
+        <div class="direction">Направление: «Монтаж и обслуживание промышленного оборудования»</div>
+        <div class="period">Специальность инженерного профиля</div>
+      </div>
+    </div>
+
+    <!-- доп. активности -->
+    <div style="margin-top:60px;" class="fi">
+      <div class="s-num" style="margin-bottom:24px;">Площадки и партнёры</div>
+      <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:12px;">
+
+        <div style="padding:22px 24px; border:1px solid var(--line); background:var(--bg-card); transition:background .35s, border-color .35s;">
+          <div style="font-size:12px; font-weight:700; color:var(--accent); margin-bottom:5px; text-transform:uppercase; letter-spacing:1px;">Сириус · Иннопрактика</div>
+          <div style="font-size:13px; color:var(--text-2); line-height:1.6;">«Большие вызовы» — руководитель образовательного проекта по направлению «Передовые промышленные технологии», г. Сочи</div>
+        </div>
+
+        <div style="padding:22px 24px; border:1px solid var(--line); background:var(--bg-card); transition:background .35s, border-color .35s;">
+          <div style="font-size:12px; font-weight:700; color:var(--accent); margin-bottom:5px; text-transform:uppercase; letter-spacing:1px;">МГУ · Роснефть</div>
+          <div style="font-size:13px; color:var(--text-2); line-height:1.6;">Летняя школа Роснефти — преподаватель направления «Инженерные технологии», г. Москва</div>
+        </div>
+
+        <div style="padding:22px 24px; border:1px solid var(--line); background:var(--bg-card); transition:background .35s, border-color .35s;">
+          <div style="font-size:12px; font-weight:700; color:var(--accent); margin-bottom:5px; text-transform:uppercase; letter-spacing:1px;">Лагерь «Артек»</div>
+          <div style="font-size:13px; color:var(--text-2); line-height:1.6;">Эксперт от Министерства сельского хозяйства РФ по направлению БПЛА на мероприятии 100-летия лагеря</div>
+        </div>
+
+        <div style="padding:22px 24px; border:1px solid var(--line); background:var(--bg-card); transition:background .35s, border-color .35s;">
+          <div style="font-size:12px; font-weight:700; color:var(--accent); margin-bottom:5px; text-transform:uppercase; letter-spacing:1px;">Всемирный фестиваль молодёжи</div>
+          <div style="font-size:13px; color:var(--text-2); line-height:1.6;">Атташе делегации Москвы на ВФМ-2024; встречи с международными делегациями в сфере молодёжной политики</div>
+        </div>
+
+        <div style="padding:22px 24px; border:1px solid var(--line); background:var(--bg-card); transition:background .35s, border-color .35s;">
+          <div style="font-size:12px; font-weight:700; color:var(--accent); margin-bottom:5px; text-transform:uppercase; letter-spacing:1px;">ВДНХ · Выставка «Россия»</div>
+          <div style="font-size:13px; color:var(--text-2); line-height:1.6;">Экспонент Вологодской области; спикер Ассоциации кулинаров в рамках выставки «РОССИЯ», г. Москва</div>
+        </div>
+
+        <div style="padding:22px 24px; border:1px solid var(--line); background:var(--bg-card); transition:background .35s, border-color .35s;">
+          <div style="font-size:12px; font-weight:700; color:var(--accent); margin-bottom:5px; text-transform:uppercase; letter-spacing:1px;">Центр «Полярная звезда»</div>
+          <div style="font-size:13px; color:var(--text-2); line-height:1.6;">Преподаватель инженерных и IT-дисциплин; авторские практические занятия по аддитивным технологиям</div>
+        </div>
+
+        <div style="padding:22px 24px; border:1px solid var(--line); background:var(--bg-card); transition:background .35s, border-color .35s;">
+          <div style="font-size:12px; font-weight:700; color:var(--accent); margin-bottom:5px; text-transform:uppercase; letter-spacing:1px;">Газпром нефть · ЯНАО</div>
+          <div style="font-size:13px; color:var(--text-2); line-height:1.6;">Турнир «Умножая таланты» — наставник и автор кейсов; профильные смены в Муравленко, Ноябрьске, Надыме, Яр-Сале, Тарко-Сале</div>
+        </div>
+
+        <div style="padding:22px 24px; border:1px solid var(--line); background:var(--bg-card); transition:background .35s, border-color .35s;">
+          <div style="font-size:12px; font-weight:700; color:var(--accent); margin-bottom:5px; text-transform:uppercase; letter-spacing:1px;">Иннагрика · ПроАгро</div>
+          <div style="font-size:13px; color:var(--text-2); line-height:1.6;">Олимпиада по агрогенетике и лагерь «ПроАгро» — младший методист, эксперт по БПЛА и MR (Москва, Воронеж, Нижний Новгород)</div>
+        </div>
+
+        <div style="padding:22px 24px; border:1px solid var(--line); background:var(--bg-card); transition:background .35s, border-color .35s;">
+          <div style="font-size:12px; font-weight:700; color:var(--accent); margin-bottom:5px; text-transform:uppercase; letter-spacing:1px;">Московский урбанистический форум</div>
+          <div style="font-size:13px; color:var(--text-2); line-height:1.6;">Организатор; участие в рабочих сессиях по теме городских технологий и цифровой инфраструктуры</div>
+        </div>
+
+        <div style="padding:22px 24px; border:1px solid var(--line); background:var(--bg-card); transition:background .35s, border-color .35s;">
+          <div style="font-size:12px; font-weight:700; color:var(--accent); margin-bottom:5px; text-transform:uppercase; letter-spacing:1px;">ДНК им. С.В. Ильюшина · ВоГУ</div>
+          <div style="font-size:13px; color:var(--text-2); line-height:1.6;">Организатор, наставник и преподаватель инженерных хакатонов «Инженер будущего» и «Инженер в каждый дом» (2019–2024)</div>
+        </div>
+
+        <div style="padding:22px 24px; border:1px solid var(--line); background:var(--bg-card); transition:background .35s, border-color .35s;">
+          <div style="font-size:12px; font-weight:700; color:var(--accent); margin-bottom:5px; text-transform:uppercase; letter-spacing:1px;">ДООЦ «Лесная сказка»</div>
+          <div style="font-size:13px; color:var(--text-2); line-height:1.6;">Преподаватель профильной IT-смены «Интернешка»; авторская программа для детей 10–17 лет (2019–2024)</div>
+        </div>
+
+        <div style="padding:22px 24px; border:1px solid var(--line); background:var(--bg-card); transition:background .35s, border-color .35s;">
+          <div style="font-size:12px; font-weight:700; color:var(--accent); margin-bottom:5px; text-transform:uppercase; letter-spacing:1px;">Форумы · Конференции</div>
+          <div style="font-size:13px; color:var(--text-2); line-height:1.6;">Спикер: «От Учителя к Учёному», «Образование: школа–университет–предприятие», «Сильные идеи для нового времени», «Арт-Наука», профориентационный форум старшеклассников, конференция «Биотехнологии»</div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════ FOOTER ════ -->
+<footer>
+  <div class="footer-in">
+    <div class="footer-name fi">Захар Дмитриевич <em>Сесюгин</em></div>
+    <div class="footer-row fi d1">
+      <div class="footer-info">
+        <p>г. Вологда, Россия · 17 июля 2003 г.</p>
+        <p>SesyuginZD@yandex.ru</p>
+      </div>
+      <div class="footer-roles">
+        <span class="active">Инженер-разработчик</span>
+        <span class="active">Наставник</span>
+        <span class="active">Спикер</span>
+        <span>R&amp;D</span>
+        <span>Автоматизация</span>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- ════ LIGHTBOX ════ -->
+<div class="lb" id="lb" onclick="closeLb()">
+  <button class="lb-close" onclick="closeLb()">×</button>
+  <img class="lb-img" id="lb-img" src="" alt="">
+</div>
+
+<script>
+/* ─── THEME ─── */
+function toggleTheme() {
+  const h = document.documentElement;
+  h.setAttribute('data-theme', h.getAttribute('data-theme') === 'dark' ? '' : 'dark');
+  localStorage.setItem('zs-theme', h.getAttribute('data-theme'));
+}
+(function(){
+  const t = localStorage.getItem('zs-theme');
+  if (t === 'dark') document.documentElement.setAttribute('data-theme','dark');
+})();
+
+/* ─── LIGHTBOX ─── */
+function openLb(el) {
+  document.getElementById('lb-img').src = el.src;
+  document.getElementById('lb').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+function closeLb() {
+  document.getElementById('lb').classList.remove('open');
+  document.body.style.overflow = '';
+}
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLb(); });
+
+/* ─── SCROLL ANIMATIONS ─── */
+const io = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) { e.target.classList.add('vis'); io.unobserve(e.target); }
+  });
+}, { threshold: 0.08 });
+document.querySelectorAll('.fi, .fi-l, .fi-r').forEach(el => io.observe(el));
+
+/* ─── NAV ACTIVE LINK ─── */
+const sections = document.querySelectorAll('section[id]');
+const navLinks = document.querySelectorAll('.nav-links a');
+const navObs = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      navLinks.forEach(a => a.style.color = '');
+      const active = document.querySelector(`.nav-links a[href="#${e.target.id}"]`);
+      if (active) active.style.color = 'var(--accent)';
+    }
+  });
+}, { threshold: 0.5 });
+sections.forEach(s => navObs.observe(s));
+</script>
+</body>
+</html>
